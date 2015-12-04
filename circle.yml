@@ -1,0 +1,86 @@
+machine:
+  services:
+    - docker
+
+checkout:
+  post:
+    - git clone https://github.com/WarriorMachines/warriormachines-shell-scripts.git
+
+dependencies:
+  pre:
+    - docker login -u $DOCKER_USER -p $DOCKER_PASS -e $DOCKER_EMAIL
+
+    - sudo pip install --upgrade awscli
+    - aws --version
+
+  override:
+    - echo "APP_ENV=circleci" >> ./laravel/.env
+    - echo "APP_DEBUG=true" >> ./laravel/.env
+    - echo "APP_KEY=$APP_KEY" >> ./laravel/.env
+
+    - echo "DB_HOST=$DB_HOST" >> ./laravel/.env
+    - echo "DB_DATABASE=circle_test" >> ./laravel/.env
+    - echo "DB_USERNAME=ubuntu" >> ./laravel/.env
+    - echo "DB_PASSWORD=" >> ./laravel/.env
+
+    - cat ./laravel/.env
+
+  post:
+    - chmod u+x ./warriormachines-shell-scripts/AWS/ECS/deploy.sh
+
+database:
+  pre:
+    - sudo sed --in-place '/bind-address/d' /etc/mysql/my.cnf
+
+  override:
+    - echo "GRANT ALL PRIVILEGES ON *.* TO 'ubuntu'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES;" > query.sql
+    - mysql -u ubuntu circle_test < query.sql
+    - rm query.sql
+
+  post:
+    - sudo service mysql restart
+
+test:
+  pre:
+    - docker build --tag="warriormachines/warriormachines-laravel:v$CIRCLE_BUILD_NUM" .
+    - docker build --tag="warriormachines/warriormachines-laravel:latest" .
+
+    - docker pull warriormachines/warriormachines-php-fpm:latest
+    - docker pull warriormachines/warriormachines-nginx:latest
+    - docker pull wpsinc/docker-artisan:latest
+
+  override:
+    - docker run -d --name="WarriorMachinesLaravel" -v "$(pwd)"/laravel/.env:/var/www/html/.env warriormachines/warriormachines-laravel:v$CIRCLE_BUILD_NUM
+    - docker run -d --name="WarriorMachinesPhpFpm" --volumes-from WarriorMachinesLaravel warriormachines/warriormachines-php-fpm:latest
+    - docker run -d --name="WarriorMachinesNginx" -p 80:80 --volumes-from WarriorMachinesLaravel --link="WarriorMachinesPhpFpm:WarriorMachinesPhpFpm" warriormachines/warriormachines-nginx:latest
+
+    - docker run --name="WarriorMachinesMigrate" --privileged="true" --volumes-from WarriorMachinesLaravel wpsinc/docker-artisan migrate
+
+  post:
+    - docker images
+    - docker ps -a
+
+    - docker logs WarriorMachinesLaravel
+    - docker logs WarriorMachinesPhpFpm
+    - docker logs WarriorMachinesNginx
+
+    - docker logs WarriorMachinesMigrate
+
+    - curl --retry 2 --retry-delay 2 -v http://localhost:80/health-check
+
+# Note: Deployment commands are triggered only after a successful (green) build.
+deployment:
+  staging:
+    branch: [dev]
+    commands:
+      - docker push warriormachines/warriormachines-laravel:v$CIRCLE_BUILD_NUM
+
+      - ./warriormachines-shell-scripts/AWS/ECS/deploy.sh v$CIRCLE_BUILD_NUM web-staging-cluster us-west-2 warriormachines-laravel-staging-service ./warriormachines-shell-scripts/AWS/ECS/task-definitions/warriormachines-laravel/warriormachines-laravel-staging-task-definition.json warriormachines-laravel-staging-task-definition warriormachines-laravel-staging-task-definition
+
+  production:
+    branch: [master]
+    commands:
+      - docker push warriormachines/warriormachines-laravel:v$CIRCLE_BUILD_NUM
+      - docker push warriormachines/warriormachines-laravel:latest
+
+      - ./warriormachines-shell-scripts/AWS/ECS/deploy.sh v$CIRCLE_BUILD_NUM web-production-cluster us-west-2 warriormachines-laravel-production-service ./warriormachines-shell-scripts/AWS/ECS/task-definitions/warriormachines-laravel/warriormachines-laravel-production-task-definition.json warriormachines-laravel-production-task-definition warriormachines-laravel-production-task-definition
