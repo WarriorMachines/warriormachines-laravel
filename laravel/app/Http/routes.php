@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('health-check', function () {
+    return response('The application is really, really healthy... like Chuck Norris healthy.', 200);
+});
