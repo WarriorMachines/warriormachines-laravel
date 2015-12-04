@@ -57,6 +57,9 @@ test:
     - docker run --name="WarriorMachinesMigrate" --privileged="true" --volumes-from WarriorMachinesLaravel wpsinc/docker-artisan migrate
 
   post:
+    # To connect to the database on the host from inside a container, this command tells us the IP the host is available through. (ie. 172.17.42.1)
+    - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' WarriorMachinesLaravel)" -- bash -c "/sbin/ip route|awk '/default/ { print $3 }'"
+
     - docker images
     - docker ps -a
 
