@@ -1,0 +1,20 @@
+WarriorMachinesLaravel:
+  image: warriormachines/warriormachines-laravel
+  volumes:
+   - ./laravel:/var/www/html
+
+WarriorMachinesNginx:
+  external_links:
+   - mysql-database
+  image: warriormachines/warriormachines-nginx:latest
+  links:
+   - WarriorMachinesPhpFpm
+  ports:
+   - "80"
+  volumes_from:
+   - WarriorMachinesLaravel
+
+WarriorMachinesPhpFpm:
+  image: warriormachines/warriormachines-php-fpm:latest
+  volumes_from:
+   - WarriorMachinesLaravel
