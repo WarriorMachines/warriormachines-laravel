@@ -26,6 +26,10 @@ dependencies:
 
     - cat ./.env
 
+    - ls -lah
+    - ls -lah public
+    - ls -lah public/discuss
+
     # phpBB configuration file.
     - echo "\$dbms = 'phpbb\\db\\driver\\mysqli';" >> ./public/discuss/config.php
     - echo "\$dbhost = \'$DB_HOST\';" >> ./public/discuss/config.php
