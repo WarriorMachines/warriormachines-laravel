@@ -31,6 +31,7 @@ dependencies:
     - ls -lah public/discuss
 
     # phpBB configuration file.
+    - mkdir -p ./public/discuss
     - echo "\$dbms = 'phpbb\\db\\driver\\mysqli';" >> ./public/discuss/config.php
     - echo "\$dbhost = \'$DB_HOST\';" >> ./public/discuss/config.php
     - echo "\$dbname = 'circle_test';" >> ./public/discuss/config.php
