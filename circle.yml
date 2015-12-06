@@ -13,8 +13,7 @@ dependencies:
   pre:
     - docker login -u $DOCKER_USER -p $DOCKER_PASS -e $DOCKER_EMAIL
 
-    - sudo pip install --upgrade awscli
-    - aws --version
+    - pip install --upgrade awscli && aws --version
 
   post:
     # Laravel configuration file.
