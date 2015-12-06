@@ -1,5 +1,5 @@
 WarriorMachinesLaravel:
-  image: warriormachines/warriormachines-laravel
+  image: warriormachines/warriormachines-laravel:latest
   volumes:
    - ./laravel:/var/www/html
 
@@ -13,6 +13,11 @@ WarriorMachinesNginx:
    - "80"
   volumes_from:
    - WarriorMachinesLaravel
+
+WarriorMachinesPhpBb:
+  image: warriormachines/warriormachines-phpbb:latest
+  volumes:
+   - ./laravel/public/discuss:/var/www/html/public/discuss
 
 WarriorMachinesPhpFpm:
   image: warriormachines/warriormachines-php-fpm:latest
