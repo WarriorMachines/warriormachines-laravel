@@ -5,6 +5,7 @@ machine:
 checkout:
   post:
     - git clone https://github.com/WarriorMachines/omnificent.git
+    - chmod u+x ./omnificent/AWS/ECS/deploy.sh
 
 dependencies:
   pre:
@@ -13,7 +14,7 @@ dependencies:
     - sudo pip install --upgrade awscli
     - aws --version
 
-  override:
+  post:
     # Laravel configuration file.
     - echo "APP_ENV=circleci" >> ./.env
     - echo "APP_DEBUG=true" >> ./.env
@@ -25,10 +26,6 @@ dependencies:
     - echo "DB_PASSWORD=" >> ./.env
 
     - cat ./.env
-
-    - ls -lah
-    - ls -lah public
-    - ls -lah public/discuss
 
     # phpBB configuration file.
     - mkdir -p ./public/discuss
@@ -44,9 +41,6 @@ dependencies:
     - echo "@define('DEBUG', true);" >> ./public/discuss/config.php
 
     - cat ./public/discuss/config.php
-
-  post:
-    - chmod u+x ./omnificent/AWS/ECS/deploy.sh
 
 database:
   pre:
