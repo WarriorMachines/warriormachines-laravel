@@ -27,17 +27,16 @@ dependencies:
     - cat ./.env
 
     # phpBB configuration file.
-    - echo "$dbms = 'phpbb\\db\\driver\\mysqli';" >> ./public/discuss/config.php
-    - echo "$dbhost = \'$DB_HOST\';" >> ./public/discuss/config.php
-    - echo "$dbname = 'circle_test';" >> ./public/discuss/config.php
-    - echo "$dbuser = 'ubuntu';" >> ./public/discuss/config.php
-    - echo "$dbpasswd = '';" >> ./public/discuss/config.php
-    - echo "$table_prefix = 'phpbb_';" >> ./public/discuss/config.php
-    - echo "$phpbb_adm_relative_path = 'adm/';" >> ./public/discuss/config.php
-    - echo "$acm_type = 'phpbb\\cache\\driver\\file';" >> ./public/discuss/config.php
+    - echo "\$dbms = 'phpbb\\db\\driver\\mysqli';" >> ./public/discuss/config.php
+    - echo "\$dbhost = \'$DB_HOST\';" >> ./public/discuss/config.php
+    - echo "\$dbname = 'circle_test';" >> ./public/discuss/config.php
+    - echo "\$dbuser = 'ubuntu';" >> ./public/discuss/config.php
+    - echo "\$dbpasswd = '';" >> ./public/discuss/config.php
+    - echo "\$table_prefix = 'phpbb_';" >> ./public/discuss/config.php
+    - echo "\$phpbb_adm_relative_path = 'adm/';" >> ./public/discuss/config.php
+    - echo "\$acm_type = 'phpbb\\cache\\driver\\file';" >> ./public/discuss/config.php
     - echo "@define('PHPBB_INSTALLED', true);" >> ./public/discuss/config.php
     - echo "@define('DEBUG', true);" >> ./public/discuss/config.php
-    - echo "" >> ./public/discuss/config.php
 
     - cat ./public/discuss/config.php
 
