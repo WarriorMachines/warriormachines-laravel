@@ -6,6 +6,9 @@ checkout:
   post:
     - git clone https://github.com/WarriorMachines/omnificent.git
 
+    - git submodule sync
+    - git submodule update --init
+
 dependencies:
   pre:
     - docker login -u $DOCKER_USER -p $DOCKER_PASS -e $DOCKER_EMAIL
