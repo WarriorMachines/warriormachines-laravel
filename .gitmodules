@@ -1,3 +1,0 @@
-[submodule "warriormachines-phpbb"]
-	path = laravel/public/discuss
-	url = https://github.com/WarriorMachines/warriormachines-phpbb.git
