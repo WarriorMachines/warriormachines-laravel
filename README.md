@@ -2,7 +2,7 @@
 
 ### Docker + Linux + NGiNX + MySQL + PHP-FPM + Laravel
 
-# <CircleCI badge goes here>
+[![Circle CI](https://circleci.com/gh/WarriorMachines/warriormachines-laravel.svg?style=svg&circle-token=049e6ec1339aca262d50128ac67e148dbc0a1318)](https://circleci.com/gh/WarriorMachines/warriormachines-laravel)
 
 ## Environment setup
 
@@ -34,8 +34,8 @@ docker run -d --name="mysql-database" -p 3306:3306 -e "MYSQL_ROOT_PASSWORD=rootp
 ##### Create the database:
 In MySQL Workbench create a new schema called `warriormachines_local_db` with `utf8_general_ci` collation.
 
-##### Configure environment file:
-Copy `laravel/.env.example` to `laravel/.env` and enter the appropriate credentials. 
+##### Configure Laravel environment file:
+Copy `.env.example` to `.env` and enter the appropriate credentials. 
 
 ##### Use *Docker Compose* to bring `up -d`, `stop`, or `rm` the stack:
 From within /your/project/directory/`warriormachines-laravel/`
