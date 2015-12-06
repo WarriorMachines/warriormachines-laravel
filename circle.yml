@@ -64,9 +64,9 @@ test:
     - docker pull warriormachines/warriormachines-nginx:latest
     - docker pull wpsinc/docker-artisan:latest
 
-    - docker run -d --name="WarriorMachinesLaravel" -v "$(pwd)"/laravel/.env:/var/www/html/.env warriormachines/warriormachines-laravel:v$CIRCLE_BUILD_NUM
-    - docker run -d --name="WarriorMachinesPhpBb" -v "$(pwd)"/laravel/public/discuss/config.php:/var/www/html/public/discuss/config.php warriormachines/warriormachines-phpbb:latest
-    - docker run -d --name="WarriorMachinesPhpFpm" --volumes-from WarriorMachinesLaravel warriormachines/warriormachines-php-fpm:latest
+    - docker run -d --name="WarriorMachinesLaravel" -v "$(pwd)"/.env:/var/www/html/.env warriormachines/warriormachines-laravel:v$CIRCLE_BUILD_NUM
+    - docker run -d --name="WarriorMachinesPhpBb" -v "$(pwd)"/public/discuss/config.php:/var/www/html/public/discuss/config.php warriormachines/warriormachines-phpbb:latest
+    - docker run -d --name="WarriorMachinesPhpFpm" --volumes-from WarriorMachinesLaravel --volumes-from WarriorMachinesPhpBb warriormachines/warriormachines-php-fpm:latest
     - docker run -d --name="WarriorMachinesNginx" -p 80:80 --volumes-from WarriorMachinesLaravel --volumes-from WarriorMachinesPhpBb --link="WarriorMachinesPhpFpm:WarriorMachinesPhpFpm" warriormachines/warriormachines-nginx:latest
 
     - docker run --name="WarriorMachinesMigrate" --privileged="true" --volumes-from WarriorMachinesLaravel wpsinc/docker-artisan migrate
