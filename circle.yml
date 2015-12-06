@@ -47,8 +47,6 @@ dependencies:
 database:
   pre:
     - sudo sed --in-place '/bind-address/d' /etc/mysql/my.cnf
-
-  override:
     - echo "GRANT ALL PRIVILEGES ON *.* TO 'ubuntu'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES;" > query.sql
     - mysql -u ubuntu circle_test < query.sql
     - rm query.sql
@@ -66,7 +64,6 @@ test:
     - docker pull warriormachines/warriormachines-nginx:latest
     - docker pull wpsinc/docker-artisan:latest
 
-  override:
     - docker run -d --name="WarriorMachinesLaravel" -v "$(pwd)"/laravel/.env:/var/www/html/.env warriormachines/warriormachines-laravel:v$CIRCLE_BUILD_NUM
     - docker run -d --name="WarriorMachinesPhpBb" -v "$(pwd)"/laravel/public/discuss/config.php:/var/www/html/public/discuss/config.php warriormachines/warriormachines-phpbb:latest
     - docker run -d --name="WarriorMachinesPhpFpm" --volumes-from WarriorMachinesLaravel warriormachines/warriormachines-php-fpm:latest
