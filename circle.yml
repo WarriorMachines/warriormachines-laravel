@@ -63,10 +63,10 @@ test:
     - docker pull warriormachines/warriormachines-nginx:latest
     - docker pull wpsinc/docker-artisan:latest
 
-    - docker run -d --name="WarriorMachinesLaravel" -v "$(pwd)"/.env:/var/www/html/.env warriormachines/warriormachines-laravel:v$CIRCLE_BUILD_NUM
     - docker run -d --name="WarriorMachinesPhpBb" -v "$(pwd)"/public/discuss/config.php:/var/www/html/public/discuss/config.php warriormachines/warriormachines-phpbb:latest
-    - docker run -d --name="WarriorMachinesPhpFpm" --volumes-from WarriorMachinesLaravel --volumes-from WarriorMachinesPhpBb warriormachines/warriormachines-php-fpm:latest
-    - docker run -d --name="WarriorMachinesNginx" -p 80:80 --volumes-from WarriorMachinesLaravel --volumes-from WarriorMachinesPhpBb --link="WarriorMachinesPhpFpm:WarriorMachinesPhpFpm" warriormachines/warriormachines-nginx:latest
+    - docker run -d --name="WarriorMachinesLaravel" -v "$(pwd)"/.env:/var/www/html/.env --volumes-from WarriorMachinesPhpBb warriormachines/warriormachines-laravel:v$CIRCLE_BUILD_NUM
+    - docker run -d --name="WarriorMachinesPhpFpm" --volumes-from WarriorMachinesLaravel  warriormachines/warriormachines-php-fpm:latest
+    - docker run -d --name="WarriorMachinesNginx" -p 80:80 --volumes-from WarriorMachinesLaravel --link="WarriorMachinesPhpFpm:WarriorMachinesPhpFpm" warriormachines/warriormachines-nginx:latest
 
     - docker run --name="WarriorMachinesMigrate" --privileged="true" --volumes-from WarriorMachinesLaravel wpsinc/docker-artisan migrate
 
@@ -77,15 +77,15 @@ test:
     - docker images
     - docker ps -a
 
-    - docker logs WarriorMachinesLaravel
     - docker logs WarriorMachinesPhpBb
+    - docker logs WarriorMachinesLaravel
     - docker logs WarriorMachinesPhpFpm
     - docker logs WarriorMachinesNginx
 
     - docker logs WarriorMachinesMigrate
 
     - curl --retry 2 --retry-delay 2 -v http://localhost:80/health-check
-    - curl --retry 2 --retry-delay 2 -v http://localhost:80/discuss
+    - curl --retry 2 --retry-delay 2 -v http://localhost:80/discuss/index.php
 
 # Note: Deployment commands are triggered only after a successful (green) build.
 deployment:
