@@ -32,7 +32,7 @@ dependencies:
     # phpBB configuration file.
     - mkdir -p ./public/discuss
     - echo "\$dbms = 'phpbb\\db\\driver\\mysqli';" >> ./public/discuss/config.php
-    - echo "\$dbhost = \'$DB_HOST\';" >> ./public/discuss/config.php
+    - echo "\$dbhost = '$DB_HOST';" >> ./public/discuss/config.php
     - echo "\$dbname = 'circle_test';" >> ./public/discuss/config.php
     - echo "\$dbuser = 'ubuntu';" >> ./public/discuss/config.php
     - echo "\$dbpasswd = '';" >> ./public/discuss/config.php
