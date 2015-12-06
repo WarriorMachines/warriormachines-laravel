@@ -15,31 +15,31 @@ dependencies:
 
   override:
     # Laravel configuration file.
-    - echo "APP_ENV=circleci" >> ./laravel/.env
-    - echo "APP_DEBUG=true" >> ./laravel/.env
-    - echo "APP_KEY=$APP_KEY" >> ./laravel/.env
+    - echo "APP_ENV=circleci" >> ./.env
+    - echo "APP_DEBUG=true" >> ./.env
+    - echo "APP_KEY=$APP_KEY" >> ./.env
 
-    - echo "DB_HOST=$DB_HOST" >> ./laravel/.env
-    - echo "DB_DATABASE=circle_test" >> ./laravel/.env
-    - echo "DB_USERNAME=ubuntu" >> ./laravel/.env
-    - echo "DB_PASSWORD=" >> ./laravel/.env
+    - echo "DB_HOST=$DB_HOST" >> ./.env
+    - echo "DB_DATABASE=circle_test" >> ./.env
+    - echo "DB_USERNAME=ubuntu" >> ./.env
+    - echo "DB_PASSWORD=" >> ./.env
 
-    - cat ./laravel/.env
+    - cat ./.env
 
     # phpBB configuration file.
-    - echo "$dbms = 'phpbb\\db\\driver\\mysqli';" >> ./laravel/public/discuss/config.php
-    - echo "$dbhost = \'$DB_HOST\';" >> ./laravel/public/discuss/config.php
-    - echo "$dbname = 'circle_test';" >> ./laravel/public/discuss/config.php
-    - echo "$dbuser = 'ubuntu';" >> ./laravel/public/discuss/config.php
-    - echo "$dbpasswd = '';" >> ./laravel/public/discuss/config.php
-    - echo "$table_prefix = 'phpbb_';" >> ./laravel/public/discuss/config.php
-    - echo "$phpbb_adm_relative_path = 'adm/';" >> ./laravel/public/discuss/config.php
-    - echo "$acm_type = 'phpbb\\cache\\driver\\file';" >> ./laravel/public/discuss/config.php
-    - echo "@define('PHPBB_INSTALLED', true);" >> ./laravel/public/discuss/config.php
-    - echo "@define('DEBUG', true);" >> ./laravel/public/discuss/config.php
-    - echo "" >> ./laravel/public/discuss/config.php
+    - echo "$dbms = 'phpbb\\db\\driver\\mysqli';" >> ./public/discuss/config.php
+    - echo "$dbhost = \'$DB_HOST\';" >> ./public/discuss/config.php
+    - echo "$dbname = 'circle_test';" >> ./public/discuss/config.php
+    - echo "$dbuser = 'ubuntu';" >> ./public/discuss/config.php
+    - echo "$dbpasswd = '';" >> ./public/discuss/config.php
+    - echo "$table_prefix = 'phpbb_';" >> ./public/discuss/config.php
+    - echo "$phpbb_adm_relative_path = 'adm/';" >> ./public/discuss/config.php
+    - echo "$acm_type = 'phpbb\\cache\\driver\\file';" >> ./public/discuss/config.php
+    - echo "@define('PHPBB_INSTALLED', true);" >> ./public/discuss/config.php
+    - echo "@define('DEBUG', true);" >> ./public/discuss/config.php
+    - echo "" >> ./public/discuss/config.php
 
-    - cat ./laravel/public/discuss/config.php
+    - cat ./public/discuss/config.php
 
   post:
     - chmod u+x ./omnificent/AWS/ECS/deploy.sh

@@ -1,7 +1,7 @@
 WarriorMachinesLaravel:
   image: warriormachines/warriormachines-laravel:latest
   volumes:
-   - ./laravel:/var/www/html
+   - ./:/var/www/html
 
 WarriorMachinesNginx:
   external_links:
@@ -17,7 +17,7 @@ WarriorMachinesNginx:
 WarriorMachinesPhpBb:
   image: warriormachines/warriormachines-phpbb:latest
   volumes:
-   - ./laravel/public/discuss:/var/www/html/public/discuss
+   - ./public/discuss:/var/www/html/public/discuss
 
 WarriorMachinesPhpFpm:
   image: warriormachines/warriormachines-php-fpm:latest
