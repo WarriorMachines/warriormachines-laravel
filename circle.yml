@@ -77,15 +77,15 @@ test:
     - docker images
     - docker ps -a
 
+    - curl --retry 2 --retry-delay 2 -v http://localhost:80/health-check
+    - curl --retry 2 --retry-delay 2 -v http://localhost:80/discuss/index.php
+
     - docker logs WarriorMachinesPhpBb
     - docker logs WarriorMachinesLaravel
     - docker logs WarriorMachinesPhpFpm
     - docker logs WarriorMachinesNginx
 
     - docker logs WarriorMachinesMigrate
-
-    - curl --retry 2 --retry-delay 2 -v http://localhost:80/health-check
-    - curl --retry 2 --retry-delay 2 -v http://localhost:80/discuss/index.php
 
 # Note: Deployment commands are triggered only after a successful (green) build.
 deployment:
