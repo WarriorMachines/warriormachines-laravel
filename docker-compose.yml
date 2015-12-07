@@ -13,6 +13,7 @@ WarriorMachinesNginx:
    - WarriorMachinesPhpFpm
   ports:
    - "80"
+   - "80:80"
   volumes_from:
    - WarriorMachinesLaravel
 
