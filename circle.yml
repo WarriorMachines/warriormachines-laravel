@@ -30,6 +30,7 @@ dependencies:
 
     # phpBB configuration file.
     - mkdir -p ./public/discuss
+    - echo "<?php" >> ./public/discuss/config.php
     - echo "\$dbms = 'phpbb\\db\\driver\\mysqli';" >> ./public/discuss/config.php
     - echo "\$dbhost = '$DB_HOST';" >> ./public/discuss/config.php
     - echo "\$dbname = 'circle_test';" >> ./public/discuss/config.php
