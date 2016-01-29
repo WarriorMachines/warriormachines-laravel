@@ -15,7 +15,6 @@ dependencies:
 
     - sudo pip install --upgrade awscli && aws --version
 
-  post:
     # Laravel configuration file.
     - echo "APP_ENV=circleci" >> ./.env
     - echo "APP_DEBUG=true" >> ./.env
@@ -29,47 +28,43 @@ dependencies:
     - cat ./.env
 
     # phpBB configuration file.
-    - mkdir -p ./public/discuss
-    - echo "<?php" >> ./public/discuss/config.php
-    - echo "\$dbms = 'phpbb\\db\\driver\\mysqli';" >> ./public/discuss/config.php
-    - echo "\$dbhost = '$DB_HOST';" >> ./public/discuss/config.php
-    - echo "\$dbname = 'circle_test';" >> ./public/discuss/config.php
-    - echo "\$dbuser = 'ubuntu';" >> ./public/discuss/config.php
-    - echo "\$dbpasswd = '';" >> ./public/discuss/config.php
-    - echo "\$table_prefix = 'phpbb_';" >> ./public/discuss/config.php
-    - echo "\$phpbb_adm_relative_path = 'adm/';" >> ./public/discuss/config.php
-    - echo "\$acm_type = 'phpbb\\cache\\driver\\file';" >> ./public/discuss/config.php
-    - echo "@define('PHPBB_INSTALLED', true);" >> ./public/discuss/config.php
-    - echo "@define('DEBUG', true);" >> ./public/discuss/config.php
+    - mkdir -p ./public/forums
+    - echo "<?php" >> ./public/forums/config.php
+    - echo "\$dbms = 'phpbb\\db\\driver\\mysqli';" >> ./public/forums/config.php
+    - echo "\$dbhost = '$DB_HOST';" >> ./public/forums/config.php
+    - echo "\$dbname = 'circle_test';" >> ./public/forums/config.php
+    - echo "\$dbuser = 'ubuntu';" >> ./public/forums/config.php
+    - echo "\$dbpasswd = '';" >> ./public/forums/config.php
+    - echo "\$table_prefix = 'phpbb_';" >> ./public/forums/config.php
+    - echo "\$phpbb_adm_relative_path = 'adm/';" >> ./public/forums/config.php
+    - echo "\$acm_type = 'phpbb\\cache\\driver\\file';" >> ./public/forums/config.php
+    - echo "@define('PHPBB_INSTALLED', true);" >> ./public/forums/config.php
+    - echo "@define('DEBUG', true);" >> ./public/forums/config.php
 
-    - cat ./public/discuss/config.php
+    - cat ./public/forums/config.php
 
-database:
-  pre:
     - sudo sed --in-place '/bind-address/d' /etc/mysql/my.cnf
     - echo "GRANT ALL PRIVILEGES ON *.* TO 'ubuntu'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES;" > query.sql
     - mysql -u ubuntu circle_test < query.sql
     - rm query.sql
-
-  post:
     - sudo service mysql restart
 
 test:
   pre:
-    - docker build --tag="warriormachines/warriormachines-laravel:v$CIRCLE_BUILD_NUM" .
-    - docker build --tag="warriormachines/warriormachines-laravel:latest" .
+    - docker build --tag="warriormachines/warriormachines-laravel:v$CIRCLE_BUILD_NUM" ./
+    - docker build --tag="warriormachines/warriormachines-laravel:latest" ./
 
     - docker pull warriormachines/warriormachines-phpbb:latest
     - docker pull warriormachines/warriormachines-php-fpm:latest
     - docker pull warriormachines/warriormachines-nginx:latest
-    - docker pull wpsinc/docker-artisan:latest
 
-    - docker run -d --name="WarriorMachinesPhpBb" -v "$(pwd)"/public/discuss/config.php:/var/www/html/public/discuss/config.php warriormachines/warriormachines-phpbb:latest
+    - docker run -d --name="WarriorMachinesPhpBb" -v "$(pwd)"/public/forums/config.php:/var/www/html/public/forums/config.php warriormachines/warriormachines-phpbb:latest
     - docker run -d --name="WarriorMachinesLaravel" -v "$(pwd)"/.env:/var/www/html/.env --volumes-from WarriorMachinesPhpBb warriormachines/warriormachines-laravel:v$CIRCLE_BUILD_NUM
     - docker run -d --name="WarriorMachinesPhpFpm" --volumes-from WarriorMachinesLaravel  warriormachines/warriormachines-php-fpm:latest
     - docker run -d --name="WarriorMachinesNginx" -p 80:80 --volumes-from WarriorMachinesLaravel --link="WarriorMachinesPhpFpm:WarriorMachinesPhpFpm" warriormachines/warriormachines-nginx:latest
 
-    - docker run --name="WarriorMachinesMigrate" --privileged="true" --volumes-from WarriorMachinesLaravel wpsinc/docker-artisan migrate
+    - php artisan migrate
+    - php artisan db:seed
 
   post:
     # To connect to the database on the host from inside a container, this command tells us the IP the host is available through. (ie. 172.17.42.1)
@@ -79,7 +74,7 @@ test:
     - docker ps -a
 
     - curl --retry 2 --retry-delay 2 -v http://localhost:80/health-check
-    - curl --retry 2 --retry-delay 2 -v http://localhost:80/discuss/index.php
+    - curl --retry 2 --retry-delay 2 -v http://localhost:80/forums/index.php
 
     - docker logs WarriorMachinesPhpBb
     - docker logs WarriorMachinesLaravel

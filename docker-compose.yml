@@ -20,7 +20,7 @@ WarriorMachinesNginx:
 WarriorMachinesPhpBb:
   image: warriormachines/warriormachines-phpbb:latest
   volumes:
-   - ../warriormachines-phpbb/:/var/www/html/public/discuss
+   - ../warriormachines-phpbb/:/var/www/html/public/forums
 
 WarriorMachinesPhpFpm:
   image: warriormachines/warriormachines-php-fpm:latest
