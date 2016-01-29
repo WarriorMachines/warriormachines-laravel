@@ -45,3 +45,17 @@ For documentation purposes only. If needed, run this command to manually build t
 ```shell
 docker build --rm --force-rm --tag="warriormachines/warriormachines-laravel" .
 ```
+
+##### Develop assets
+You'll need the following installed...
+
+* Node.js [https://nodejs.org](https://nodejs.org/)
+* Bower `npm install -g bower`
+* Gulp `npm install -g gulp`
+
+From within /your/project/directory/`alchemy-laravel`
+
+`bower install`
+`npm install`
+
+Build assets with `gulp`. Alternatively, you can use `gulp watch` to auto-build on changes.

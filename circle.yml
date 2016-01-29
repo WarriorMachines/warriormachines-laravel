@@ -49,6 +49,10 @@ dependencies:
     - rm query.sql
     - sudo service mysql restart
 
+  post:
+    - bower install
+    - ./node_modules/.bin/gulp --production
+
 test:
   pre:
     - docker build --tag="warriormachines/warriormachines-laravel:v$CIRCLE_BUILD_NUM" ./

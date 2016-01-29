@@ -1,0 +1,24 @@
+{
+  "name": "Warrior Machines",
+  "authors": [
+    "Austin Maddox"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "warrior",
+    "machines"
+  ],
+  "homepage": "warriormachines.com",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.0",
+    "semantic": "semantic-ui#^2.1.8"
+  }
+}

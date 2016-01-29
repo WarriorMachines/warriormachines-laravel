@@ -1,0 +1,7 @@
+*.md
+.gitignore
+
+/.git
+/.idea
+/node_modules
+/bower_components
