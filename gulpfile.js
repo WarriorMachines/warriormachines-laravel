@@ -24,7 +24,8 @@ elixir(function (mix) {
     mix.scripts([
         'bower_components/jquery/dist/jquery.js',
         'bower_components/semantic/dist/semantic.js',
-        'resources/assets/js/app.js'
+        'resources/assets/js/app.js',
+        'resources/assets/js/components/*.js'
     ], 'public/js/all.js', './');
 
     // Versions all the files listed in this array.
