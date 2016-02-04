@@ -2,7 +2,7 @@
   "private": true,
   "dependencies": {
     "better-console": "^0.2.4",
-    "bootstrap-sass": "^3.0.0",
+    "bootstrap": "^4.0.0-alpha.2",
     "del": "^2.2.0",
     "extend": "^3.0.0",
     "gulp": "^3.9.0",
@@ -33,6 +33,7 @@
     "map-stream": "0.0.6",
     "require-dot-file": "^0.4.0",
     "run-sequence": "^1.1.5",
+    "tether": "^1.1.1",
     "yamljs": "^0.2.4"
   }
 }

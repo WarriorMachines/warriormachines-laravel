@@ -21,6 +21,9 @@ elixir(function (mix) {
 
     // Merges and compiles all the files listed in this array to `public/js/app.js`.
     mix.scripts([
+        'node_modules/jquery/dist/jquery.js',
+        'node_modules/tether/dist/js/tether.js',
+        'node_modules/bootstrap/dist/js/bootstrap.js',
         'resources/assets/js/app.js',
         'resources/assets/js/components/*.js'
     ], 'public/js/all.js', './');
