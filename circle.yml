@@ -50,7 +50,7 @@ dependencies:
     - sudo service mysql restart
 
   post:
-    - bower install
+ #   - bower install
     - ./node_modules/.bin/gulp --production
 
 test:
