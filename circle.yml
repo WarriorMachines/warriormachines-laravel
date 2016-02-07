@@ -50,7 +50,6 @@ dependencies:
     - sudo service mysql restart
 
   post:
- #   - bower install
     - ./node_modules/.bin/gulp --production
 
 test:
@@ -87,14 +86,6 @@ test:
 
 # Note: Deployment commands are triggered only after a successful (green) build.
 deployment:
-  staging:
-    branch: [dev]
-    commands:
-      - docker push warriormachines/warriormachines-laravel:v$CIRCLE_BUILD_NUM
-      - docker push warriormachines/warriormachines-laravel:latest-dev
-
-      - ./omnificent/AWS/ECS/deploy.sh v$CIRCLE_BUILD_NUM web-staging-cluster us-west-2 warriormachines-laravel-staging-service ./omnificent/AWS/ECS/task-definitions/warriormachines-laravel/warriormachines-laravel-staging-task-definition.json warriormachines-laravel-staging-task-definition warriormachines-laravel-staging-task-definition
-
   production:
     branch: [master]
     commands:
