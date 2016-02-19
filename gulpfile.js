@@ -16,6 +16,7 @@ elixir(function (mix) {
 
     //  Merges and compiles all the files listed in this array to `public/css/all.css`.
     mix.styles([
+        'node_modules/font-awesome/css/font-awesome.css',
         'resources/assets/gulp-generated/app.css'
     ], 'public/css/all.css', './');
 
@@ -27,6 +28,8 @@ elixir(function (mix) {
         'resources/assets/js/app.js',
         'resources/assets/js/components/*.js'
     ], 'public/js/all.js', './');
+
+    mix.copy('node_modules/font-awesome/fonts', 'public/build/fonts');
 
     // Versions all the files listed in this array.
     mix.version([

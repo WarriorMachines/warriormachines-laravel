@@ -3,6 +3,7 @@
   "dependencies": {
     "better-console": "^0.2.4",
     "bootstrap": "^4.0.0-alpha.2",
+    "font-awesome": "^4.5.0",
     "del": "^2.2.0",
     "extend": "^3.0.0",
     "gulp": "^3.9.0",
