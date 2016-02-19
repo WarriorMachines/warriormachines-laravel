@@ -12,11 +12,11 @@ var elixir = require('laravel-elixir');
 
 elixir(function (mix) {
     // Creates `resources/assets/sass-generated/app.css` from `resources/assets/sass/app.scss`.
-    mix.sass('app.scss', 'resources/assets/sass-generated');
+    mix.sass('app.scss', 'resources/assets/gulp-generated');
 
     //  Merges and compiles all the files listed in this array to `public/css/all.css`.
     mix.styles([
-        'resources/assets/sass-generated/app.css'
+        'resources/assets/gulp-generated/app.css'
     ], 'public/css/all.css', './');
 
     // Merges and compiles all the files listed in this array to `public/js/app.js`.
