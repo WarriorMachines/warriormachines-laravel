@@ -4,9 +4,53 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d50e2c20418a2b414e9189f6e894a401",
-    "content-hash": "84cb1e649b39527e057b630366aea257",
+    "hash": "14a5f3f8e363d4290ca8c4a5b4e517aa",
+    "content-hash": "20bae13c3312a13c035e7ec544ea869a",
     "packages": [
+        {
+            "name": "callmenp/lara-auth-bridge",
+            "version": "v2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CallMeNP/lara-auth-bridge.git",
+                "reference": "9a42b098efb3c4341f0bef1bde784bbcd1447c52"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CallMeNP/lara-auth-bridge/zipball/9a42b098efb3c4341f0bef1bde784bbcd1447c52",
+                "reference": "9a42b098efb3c4341f0bef1bde784bbcd1447c52",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.*",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "CallMeNP\\LaraAuthBridge": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "CallMeNP",
+                    "email": "np.liamg@gmail.com"
+                }
+            ],
+            "description": "Offers a simple API for the included custom phpBB authentication module. for phpBB3.0 and laravel5",
+            "keywords": [
+                "Bridge",
+                "laravel",
+                "laravel5",
+                "phpbb",
+                "phpbb3"
+            ],
+            "time": "2015-09-26 15:06:25"
+        },
         {
             "name": "classpreloader/classpreloader",
             "version": "3.0.0",

@@ -145,6 +145,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * [+] Third-party Service Providers...
+         */
+        CallMeNP\LaraAuthBridge\LaraAuthBridgeServiceProvider::class,
+
     ],
 
     /*
