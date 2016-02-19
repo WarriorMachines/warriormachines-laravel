@@ -16,12 +16,14 @@ class User extends Model implements AuthenticatableContract,
 {
     use Authenticatable, Authorizable, CanResetPassword;
 
+    protected $connection = 'phpbb';
+
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'users';
+    protected $table = 'phpbb_users';
 
     /**
      * The attributes that are mass assignable.
@@ -29,8 +31,7 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $fillable = [
-        'name',
-        'email',
+        'username',
         'password',
     ];
 

@@ -64,6 +64,18 @@ return [
             'strict'    => false,
         ],
 
+        'phpbb' => [
+            'driver'    => 'mysql',
+            'host'      => env('DB_PHPBB_HOST', 'localhost'),
+            'database'  => env('DB_PHPBB_DATABASE'),
+            'username'  => env('DB_PHPBB_USERNAME'),
+            'password'  => env('DB_PHPBB_PASSWORD', ''),
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+            'strict'    => false,
+        ],
+
         'pgsql' => [
             'driver'   => 'pgsql',
             'host'     => env('DB_HOST', 'localhost'),

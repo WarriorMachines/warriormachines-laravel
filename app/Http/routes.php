@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Auth;
+
 Route::get('/', function () {
     return view('apex');
 });
@@ -18,3 +20,16 @@ Route::get('/', function () {
 Route::get('health-check', function () {
     return response('The application is really, really healthy... like Chuck Norris healthy.', 200);
 });
+
+Route::get('home', function () {
+    return Auth::user();
+});
+
+// Authentication routes.
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('auth/logout', 'Auth\AuthController@getLogout');
+
+// Registration routes.
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');
