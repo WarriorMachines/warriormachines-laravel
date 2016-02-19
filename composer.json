@@ -8,7 +8,7 @@
   "license": "MIT",
   "type": "project",
   "require": {
-    "callmenp/lara-auth-bridge": "^2.1",
+    "callmenp/lara-auth-bridge": "dev-master",
     "laravel/framework": "5.1.*",
     "php": ">=5.5.9"
   },
