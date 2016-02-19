@@ -6,12 +6,20 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Warrior Machines</title>
     <link rel="stylesheet" href="{{ elixir('css/all.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway" type="text/css">
     <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
         ga('create', 'UA-73347217-1', 'auto');
         ga('send', 'pageview');
     </script>
@@ -57,7 +65,7 @@
     <div class="container">
         <h1 class="display-3">Warrior Machines</h1>
         <p class="lead">The only community dedicated to the warriors who protect us.</p>
-        <a href="forums/ucp.php?mode=register" class="btn btn-primary btn-lg" role="button">Join the club</a>
+        <a href="forums/ucp.php?mode=register" class="btn btn-primary btn-lg" role="button"><i class="fa fa-smile-o"></i> Join the club</a>
     </div>
 </div><!-- /.jumbotron -->
 
@@ -124,34 +132,30 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <img src="http://www.nleomf.org/assets/images/hbb/hbb-logo-2.png" class="center-block">
+            <img src="http://www.nleomf.org/assets/images/hbb/hbb-logo-2.png" class="img-fluid center-block">
         </div>
     </div>
 </div><!-- /.container -->
 
 <div class="container-fluid bg-primary p-y-2">
     <div class="container">
-
-        <div class="row">
-            <div class="col-sm-8 center-block">
-                <p class="text-xs-center">Today, in the United States, more than 900,000 law enforcement officers put their lives on the line for the safety and
-                    protection of others. They serve with valor and distinction – and with great success.</p>
-                <p class="text-xs-center">Federal statistics show that violent and property crime rates in the
-                    United States are at historic lows, thanks in large measure to the dedicated service of the men and women of law enforcement.</p>
-            </div>
+        <div class="text-xs-center">Today, in the United States, more than 900,000 law enforcement officers put their lives on the line for the safety and
+            protection of others. They serve with valor and distinction – and with great success.
+            Federal statistics show that violent and property crime rates in the
+            United States are at historic lows, thanks in large measure to the dedicated service of the men and women of law enforcement.
         </div>
-    </div><!-- /.container -->
+    </div>
 </div><!-- /.container-fluid -->
 
-<div class="container-fluid bg-inverse p-a-3">
+<div class="container-fluid bg-inverse p-t-1 p-b-3">
     <div class="container">
 
         <div class="row">
-            <div class="col-sm-6">
-                Copyright {{ date('Y') }} WarriorMachines.com. All rights reserved.
+            <div class="col-sm-9">
+                <small>Copyright &copy; {{ date('Y') }} WarriorMachines.com. All rights reserved. Yes, all of them.</small>
             </div>
-            <div class="col-sm-6 text-sm-right">
-                <span class="text-muted">Austin kicks ass</span>
+            <div class="col-sm-3 text-sm-right">
+                <small class="text-muted">Built with <i class="fa fa-heart"></i> by <a href="forums/memberlist.php?mode=viewprofile&u=2">AustinMaddox</a></small>
             </div>
         </div>
 
