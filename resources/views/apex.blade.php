@@ -26,46 +26,13 @@
 </head>
 <body>
 
-<nav class="navbar navbar-full navbar-dark bg-inverse">
-    <div class="container">
-        <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2">
-            &#9776;
-        </button>
-        <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
-            {{--<a class="navbar-brand" href="#">WM</a>--}}
-            <ul class="nav navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="forums">Forums</a>
-                </li>
-                <li class="nav-item disabled">
-                    <a class="nav-link">Gallery</a>
-                </li>
-                <li class="nav-item disabled">
-                    <a class="nav-link">About</a>
-                </li>
-                <li class="nav-item disabled">
-                    <a class="nav-link">Contact</a>
-                </li>
-                <li class="nav-item pull-xs-right">
-                    <a href="forums/ucp.php?mode=login" class="btn btn-success" role="button">Log in</a>
-                </li>
-            </ul>
-            {{--<form class="form-inline pull-xs-right">--}}
-            {{--<input class="form-control" type="text" placeholder="Search">--}}
-            {{--<button class="btn btn-success-outline" type="submit">Search</button>--}}
-            {{--</form>--}}
-        </div>
-    </div>
-</nav>
+@include ('partials.nav')
 
-<div class="jumbotron jumbotron-fluid">
+<div class="jumbotron jumbotron-fluid m-t-3">
     <div class="container">
         <h1 class="display-3">Warrior Machines</h1>
         <p class="lead">An automotive enthusiast community dedicated to the warriors who serve us.</p>
-        <a href="forums/ucp.php?mode=register" class="btn btn-primary btn-lg" role="button"><i class="fa fa-smile-o"></i> Join the club</a>
+        <a href="./forums/ucp.php?mode=register" class="btn btn-primary btn-lg" role="button"><i class="fa fa-smile-o"></i> Join the club</a>
     </div>
 </div><!-- /.jumbotron -->
 
@@ -76,21 +43,21 @@
         @foreach ($topics as $topic)
             <tr>
                 <td>
-                    <a href="forums/viewtopic.php?f={{ $topic->forum_id }}&t={{ $topic->topic_id }}">{{ $topic->topic_title }}</a>
+                    <a href="./forums/viewtopic.php?f={{ $topic->forum_id }}&t={{ $topic->topic_id }}">{{ $topic->topic_title }}</a>
                 </td>
                 <td>
                     @if (!empty($topic->topic_first_poster_colour))
-                        <a href="forums/memberlist.php?mode=viewprofile&amp;u={{ $topic->topic_poster }}" class="font-weight-bold"
+                        <a href="./forums/memberlist.php?mode=viewprofile&amp;u={{ $topic->topic_poster }}" class="font-weight-bold"
                            style="color:#{{ $topic->topic_first_poster_colour }}">{{ $topic->topic_first_poster_name }}</a>
                     @else
-                        <a href="forums/memberlist.php?mode=viewprofile&amp;u={{ $topic->topic_poster }}">{{ $topic->topic_first_poster_name }}</a>
+                        <a href="./forums/memberlist.php?mode=viewprofile&amp;u={{ $topic->topic_poster }}">{{ $topic->topic_first_poster_name }}</a>
                     @endif
                 </td>
                 <td>
                     {{ $topic->topic_time }}
                 </td>
                 <td>
-                    in <a href="forums/viewforum.php?f={{ $topic->forum_id }}">{{ $topic->forum->forum_name }}</a>
+                    in <a href="./forums/viewforum.php?f={{ $topic->forum_id }}">{{ $topic->forum->forum_name }}</a>
                 </td>
             </tr>
         @endforeach
