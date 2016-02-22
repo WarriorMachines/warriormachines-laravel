@@ -114,7 +114,7 @@
             <img src="http://i66.tinypic.com/1zh0dug.jpg" class="img-fluid img-rounded">
         </div>
         <div class="col-sm-5">
-            <p class="font-weight-bold text-uppercase text-muted p-b-2">Honoring our heros</p>
+            <p class="font-weight-bold text-uppercase text-muted p-b-2">Honoring our heroes</p>
             <h4>Home of the free, because of the brave.</h4>
             <p class="font-weight-normal text-muted p-b-3">To our men and women in uniform...past present and future- God bless you...and thank you.</p>
             <div class="row">
