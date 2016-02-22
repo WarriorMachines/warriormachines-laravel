@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Forum;
 use App\Topic;
-use Carbon\Carbon;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -18,9 +19,10 @@ class ApexController extends Controller
      */
     public function index()
     {
-        $topics = Topic::recent()->with('forum')->get();
+        $recent_topics = Topic::recent()->with('forum')->get();
+        $latest_user = User::latest()->first();
 
-        return view('apex', compact('topics'));
+        return view('apex', compact('recent_topics', 'latest_user'));
     }
 
     /**

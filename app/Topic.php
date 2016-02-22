@@ -41,7 +41,7 @@ class Topic extends Model
     public function scopeRecent($query)
     {
         return $query
-            ->take(7)
+            ->take(10)
             ->orderBy('topic_time', 'desc');
     }
 

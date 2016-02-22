@@ -16,14 +16,21 @@ class User extends Model implements AuthenticatableContract,
 {
     use Authenticatable, Authorizable, CanResetPassword;
 
+    /**
+     * The connection name for the model.
+     *
+     * @var string
+     */
     protected $connection = 'phpbb';
 
     /**
-     * The database table used by the model.
+     * The table associated with the model.
      *
      * @var string
      */
     protected $table = 'phpbb_users';
+
+    protected $primaryKey = 'user_id';
 
     /**
      * The attributes that are mass assignable.
@@ -44,4 +51,26 @@ class User extends Model implements AuthenticatableContract,
         'password',
         'remember_token',
     ];
+
+    /**
+     * Get the topics for the forum.
+     */
+    public function topics()
+    {
+        return $this->hasMany(Topic::class);
+    }
+
+    /**
+     * Scope a query to only include the latest user.
+     *
+     * @param $query
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeLatest($query)
+    {
+        return $query
+            ->take(1)
+            ->orderBy('user_regdate', 'desc');
+    }
 }

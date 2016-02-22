@@ -2,7 +2,7 @@
     <h1>Recent Topics</h1>
     <table class="table table-striped table-sm">
         <tbody>
-        @foreach ($topics as $topic)
+        @foreach ($recent_topics as $topic)
             <tr>
                 <td>
                     <a href="./forums/viewtopic.php?f={{ $topic->forum_id }}&t={{ $topic->topic_id }}">{{ $topic->topic_title }}</a>
