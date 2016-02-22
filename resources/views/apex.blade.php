@@ -137,24 +137,17 @@
     </div>
 </div><!-- /.container-fluid -->
 
-<div class="container m-y-3">
-    <div class="row">
-        <div class="col-sm-12">
-            <p>&nbsp;</p>
-        </div>
-    </div>
-</div><!-- /.container -->
+@include('partials.recent_images')
 
 <div class="container-fluid bg-inverse p-t-1 p-b-3">
-    <div class="container">
-
+    <div class="container m-b-3 p-b-3">
         <div class="row">
             <div class="col-sm-6">
                 <div>
                     <small>Copyright &copy; {{ date('Y') }} WarriorMachines.com. All rights reserved. Yes, all of them.</small>
                 </div>
                 <div>
-                    <small class="text-muted">Built with <i class="fa fa-heart"></i> by <a href="forums/memberlist.php?mode=viewprofile&u=2">AustinMaddox</a></small>
+                    <small class="text-muted">Built with <i class="fa fa-heart"></i> by <a href="forums/memberlist.php?mode=viewprofile&u=2" class="link-white">AustinMaddox</a></small>
                 </div>
             </div>
 
@@ -168,7 +161,6 @@
                 <i class="fa fa-3x fa-youtube-square"></i>
             </div>
         </div>
-
     </div><!-- /.container -->
 </div><!-- /.container-fluid -->
 
