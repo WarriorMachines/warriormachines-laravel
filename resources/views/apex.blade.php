@@ -39,9 +39,11 @@
             <div class="col-sm-7 col-md-8 col-lg-9 p-t-1">
                 @if (!empty($latest_user->user_colour))
                     ...<a href="./forums/memberlist.php?mode=viewprofile&amp;u={{ $latest_user->user_id }}" class="font-weight-bold"
-                       style="color:#{{ $latest_user->user_colour }}">{{ $latest_user->username }}</a> just joined so it can't be <span style="text-decoration: underline">that</span> bad
+                          style="color:#{{ $latest_user->user_colour }}">{{ $latest_user->username }}</a> just joined so it can't be <span
+                            style="text-decoration: underline">that</span> bad
                 @else
-                    ...<a href="./forums/memberlist.php?mode=viewprofile&amp;u={{ $latest_user->user_id }}">{{ $latest_user->username }}</a> just joined so it can't be <span style="text-decoration: underline">that</span> bad
+                    ...<a href="./forums/memberlist.php?mode=viewprofile&amp;u={{ $latest_user->user_id }}">{{ $latest_user->username }}</a> just joined so it can't be <span
+                            style="text-decoration: underline">that</span> bad
                 @endif
             </div>
         </div>
@@ -49,6 +51,24 @@
 </div><!-- /.jumbotron -->
 
 @include('partials.recent_topics')
+
+<div class="container-fluid">
+    <div class="container m-b-1">
+        <h1>Forums</h1>
+        <div class="row text-xs-center m-b-1">
+            @foreach ($main_forums as $forum)
+                <div class="col-sm-4">
+                    <div class="fa-border m-t-1">
+                        <a href="./forums/viewforum.php?f={{ $forum->forum_id }}" class="link-black">
+                            <div><i class="fa fa-5x fa-folder-open"></i></div>
+                            <div>{{ $forum->forum_name }}</div>
+                        </a>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</div>
 
 <div class="container-fluid bg-primary p-t-1 p-b-2">
     <div class="container text-xs-center">

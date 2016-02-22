@@ -19,10 +19,11 @@ class ApexController extends Controller
      */
     public function index()
     {
+        $main_forums = Forum::main()->get();
         $recent_topics = Topic::recent()->with('forum')->get();
         $latest_user = User::latest()->first();
 
-        return view('apex', compact('recent_topics', 'latest_user'));
+        return view('apex', compact('main_forums', 'recent_topics', 'latest_user'));
     }
 
     /**

@@ -1,3 +1,11 @@
+/* Black */
+a.link-black {
+  color: #373a3c;
+  &:hover {
+    color: #000;
+  }
+}
+
 /* White */
 a.link-white {
   color: #eceeef;
