@@ -64,12 +64,50 @@
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
         <h1 class="display-3">Warrior Machines</h1>
-        <p class="lead">The only community dedicated to the warriors who protect us.</p>
+        <p class="lead">An automotive enthusiast community dedicated to the warriors who serve us.</p>
         <a href="forums/ucp.php?mode=register" class="btn btn-primary btn-lg" role="button"><i class="fa fa-smile-o"></i> Join the club</a>
     </div>
 </div><!-- /.jumbotron -->
 
-<div class="container p-b-2">
+<div class="container m-b-1">
+    <h1>Recent Topics</h1>
+    <table class="table table-striped table-sm">
+        <tbody>
+        @foreach ($topics as $topic)
+            <tr>
+                <td>
+                    <a href="forums/viewtopic.php?f={{ $topic->forum_id }}&t={{ $topic->topic_id }}">{{ $topic->topic_title }}</a>
+                </td>
+                <td>
+                    @if (!empty($topic->topic_first_poster_colour))
+                        <a href="forums/memberlist.php?mode=viewprofile&amp;u={{ $topic->topic_poster }}" class="font-weight-bold"
+                           style="color:#{{ $topic->topic_first_poster_colour }}">{{ $topic->topic_first_poster_name }}</a>
+                    @else
+                        <a href="forums/memberlist.php?mode=viewprofile&amp;u={{ $topic->topic_poster }}">{{ $topic->topic_first_poster_name }}</a>
+                    @endif
+                </td>
+                <td>
+                    {{ $topic->topic_time }}
+                </td>
+                <td>
+                    in <a href="forums/viewforum.php?f={{ $topic->forum_id }}">{{ $topic->forum->forum_name }}</a>
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+</div><!-- /.container -->
+
+<div class="container-fluid bg-primary p-t-1 p-b-2">
+    <div class="container text-xs-center">
+        <h1>Our mission</h1>
+        <p class="lead">To create a welcoming community for all who support our Veterans and First Responders though peer-engagement with a focus on the automotive and power sport
+            industries.
+        </p>
+    </div>
+</div><!-- /.container-fluid -->
+
+<div class="container m-y-2">
 
     <div class="row">
         <div class="col-sm-7">
@@ -83,12 +121,12 @@
                 <div class="col-sm-6">
                     <div class="font-weight-bold">We salute you</div>
                     <div class="text-muted">For the freedoms that we all enjoy... Our thanks go to the young men and women serving in all branches of the military. <a
-                                href="forums">Learn more</a>.
+                                href="/">Learn more</a>.
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="font-weight-bold">Never forgotten</div>
-                    <div class="text-muted">To be a veteran one must know and determine one's price for freedom. <a href="forums">Learn
+                    <div class="text-muted">To be a veteran one must know and determine one's price for freedom. <a href="/">Learn
                             more</a>.
                     </div>
                 </div>
@@ -109,13 +147,13 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="font-weight-bold">Heroes</div>
-                        <div class="text-muted">Greater love has no one than this, that one lay down his life for his friends. <a href="forums">Learn
+                        <div class="text-muted">Greater love has no one than this, that one lay down his life for his friends. <a href="/">Learn
                                 more</a>.
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="font-weight-bold">Courage</div>
-                        <div class="text-muted">For your strength and courage in so many ways, for saving lives every day. Our community salutes you. <a href="forums">Learn
+                        <div class="text-muted">For your strength and courage in so many ways, for saving lives every day. Our community salutes you. <a href="/">Learn
                                 more</a>.
                         </div>
                     </div>
@@ -139,23 +177,43 @@
 
 <div class="container-fluid bg-primary p-y-2">
     <div class="container">
-        <div class="text-xs-center">Today, in the United States, more than 900,000 law enforcement officers put their lives on the line for the safety and
-            protection of others. They serve with valor and distinction – and with great success.
-            Federal statistics show that violent and property crime rates in the
-            United States are at historic lows, thanks in large measure to the dedicated service of the men and women of law enforcement.
+        <div class="text-xs-center">Today, in the United States, more than 900,000 law enforcement officers put their lives on the line for the safety and protection of others.
+            They serve with valor and distinction – and with great success.
+            Federal statistics show that violent and property crime rates in the United States are at historic lows, thanks in large measure to the dedicated service of the men and
+            women of law enforcement.
         </div>
     </div>
 </div><!-- /.container-fluid -->
+
+<div class="container m-y-3">
+    <div class="row">
+        <div class="col-sm-12">
+            <p>&nbsp;</p>
+        </div>
+    </div>
+</div><!-- /.container -->
 
 <div class="container-fluid bg-inverse p-t-1 p-b-3">
     <div class="container">
 
         <div class="row">
-            <div class="col-sm-9">
-                <small>Copyright &copy; {{ date('Y') }} WarriorMachines.com. All rights reserved. Yes, all of them.</small>
+            <div class="col-sm-6">
+                <div>
+                    <small>Copyright &copy; {{ date('Y') }} WarriorMachines.com. All rights reserved. Yes, all of them.</small>
+                </div>
+                <div>
+                    <small class="text-muted">Built with <i class="fa fa-heart"></i> by <a href="forums/memberlist.php?mode=viewprofile&u=2">AustinMaddox</a></small>
+                </div>
             </div>
-            <div class="col-sm-3 text-sm-right">
-                <small class="text-muted">Built with <i class="fa fa-heart"></i> by <a href="forums/memberlist.php?mode=viewprofile&u=2">AustinMaddox</a></small>
+
+            <div class="col-sm-6 text-xs-right">
+                <a href="https://www.facebook.com/WarriorMachinesOnline/" class="link-white" target="_blank"><i class="fa fa-3x fa-facebook-square"></i></a>
+                &nbsp;
+                <a href="https://www.instagram.com/warriormachines/" class="link-white" target="_blank"><i class="fa fa-3x fa-instagram"></i></a>
+                &nbsp;
+                <i class="fa fa-3x fa-twitter-square"></i>
+                &nbsp;
+                <i class="fa fa-3x fa-youtube-square"></i>
             </div>
         </div>
 

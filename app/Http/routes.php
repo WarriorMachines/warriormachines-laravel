@@ -13,9 +13,7 @@
 
 use Illuminate\Support\Facades\Auth;
 
-Route::get('/', function () {
-    return view('apex');
-});
+Route::get('/', 'ApexController@index');
 
 Route::get('health-check', function () {
     return response('The application is really, really healthy... like Chuck Norris healthy.', 200);
