@@ -20,7 +20,10 @@ Route::get('health-check', function () {
 });
 
 Route::get('home', function () {
-    return Auth::user();
+    if (Auth::check()) {
+        return 'The user is logged in as ' . Auth::user();
+    }
+    return 'The user is NOT logged in.';
 });
 
 // Authentication routes.
