@@ -67,8 +67,8 @@
                 </div>
             @endforeach
         </div>
-    </div>
-</div>
+    </div><!-- /.container -->
+</div><!-- /.container-fluid -->
 
 <div class="container-fluid bg-primary p-t-1 p-b-2">
     <div class="container text-xs-center">
@@ -76,7 +76,7 @@
         <p class="lead">To create a welcoming community for all who support our Veterans and First Responders though peer-engagement with a focus on the automotive and power sport
             industries.
         </p>
-    </div>
+    </div><!-- /.container -->
 </div><!-- /.container-fluid -->
 
 <div class="container m-y-2">
