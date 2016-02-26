@@ -25,6 +25,11 @@ dependencies:
     - echo "DB_USERNAME=ubuntu" >> ./.env
     - echo "DB_PASSWORD=" >> ./.env
 
+    - echo "DB_PHPBB_HOST=$DB_HOST" >> ./.env
+    - echo "DB_PHPBB_DATABASE=circle_test" >> ./.env
+    - echo "DB_PHPBB_USERNAME=ubuntu" >> ./.env
+    - echo "DB_PHPBB_PASSWORD=" >> ./.env
+
     - cat ./.env
 
     # phpBB configuration file.
