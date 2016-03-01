@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class ApexController extends Controller
+class HomeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,7 +23,7 @@ class ApexController extends Controller
         $recent_topics = Topic::recent()->with('forum')->get();
         $latest_user = User::latest()->first();
 
-        return view('apex', compact('main_forums', 'recent_topics', 'latest_user'));
+        return view('pages.home', compact('main_forums', 'recent_topics', 'latest_user'));
     }
 
     /**

@@ -13,13 +13,15 @@
 
 use Illuminate\Support\Facades\Auth;
 
-Route::get('/', 'ApexController@index');
+Route::get('/', 'HomeController@index');
 
 Route::get('health-check', function () {
     return response('The application is really, really healthy... like Chuck Norris healthy.', 200);
 });
 
-Route::get('home', function () {
+Route::get('about', 'AboutController@index');
+
+Route::get('test', function () {
     if (Auth::check()) {
         return 'The user is logged in as ' . Auth::user();
     }

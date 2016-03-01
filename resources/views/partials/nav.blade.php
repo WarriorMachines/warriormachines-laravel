@@ -1,3 +1,5 @@
+<div class="m-y-3"></div>
+
 <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
     <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#collapsing-navbar">
         &#9776;
@@ -21,7 +23,6 @@
             </li>
 
             <li class="nav-item dropdown">
-
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Search</a>
                 <div class="dropdown-menu">
                     <a href="./forums/search.php" class="dropdown-item">Search</a>
@@ -37,7 +38,6 @@
                 <a class="nav-link" href="./forums/faq.php">FAQ</a>
             </li>
 
-
             <li class="nav-item">
                 <a href="./forums/memberlist.php" class="nav-link">Members</a>
             </li>
@@ -46,6 +46,9 @@
                 <a href="./forums/memberlist.php?mode=team" class="nav-link">The team</a>
             </li>
 
+            <li class="nav-item">
+                <a href="about" class="nav-link">About</a>
+            </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="./forums/memberlist.php?mode=contactadmin">Contact us</a>
