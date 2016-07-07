@@ -1,4 +1,6 @@
 machine:
+  node:
+    version: 5.5.0
   php:
     version: 5.6.14
   services:
@@ -13,7 +15,8 @@ dependencies:
   pre:
     - docker login -u $DOCKER_USER -p $DOCKER_PASS -e $DOCKER_EMAIL
 
-    - sudo pip install --upgrade awscli && aws --version
+    - aws --version; sudo pip install --upgrade awscli; aws --version
+    - npm --version; npm update -g npm; npm --version
 
     # Laravel configuration file.
     - echo "APP_ENV=circleci" >> ./.env
@@ -54,6 +57,10 @@ dependencies:
     - rm query.sql
     - sudo service mysql restart
 
+  override:
+    - composer install --no-dev --no-interaction --no-progress --prefer-source --verbose
+    - npm install
+
   post:
     - ./node_modules/.bin/gulp --production
 
@@ -75,21 +82,17 @@ test:
     - php artisan db:seed
 
   post:
-    # To connect to the database on the host from inside a container, this command tells us the IP the host is available through. (ie. 172.17.42.1)
-    - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' WarriorMachinesLaravel)" -- bash -c "/sbin/ip route|awk '/default/ { print $3 }'"
-
     - docker images
     - docker ps -a
 
-    - curl --verbose http://localhost:80/health-check && curl --verbose --fail http://localhost:80/health-check
-    - curl --verbose http://localhost:80/forums && curl --verbose --fail http://localhost:80/forums
+    - curl --verbose http://localhost:80/health-check; curl --fail --verbose http://localhost:80/health-check
+    - curl --verbose http://localhost:80/forums; curl --fail --verbose http://localhost:80/forums
 
     - docker logs WarriorMachinesPhpBb
     - docker logs WarriorMachinesLaravel
     - docker logs WarriorMachinesPhpFpm
     - docker logs WarriorMachinesNginx
 
-# Note: Deployment commands are triggered only after a successful (green) build.
 deployment:
   production:
     branch: [master]
