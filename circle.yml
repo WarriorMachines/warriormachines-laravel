@@ -18,24 +18,40 @@ dependencies:
     - aws --version; sudo pip install --upgrade awscli; aws --version
     - npm --version; npm update -g npm; npm --version
 
-    # Laravel configuration file.
+    # Run a MySQL database in a container.
+    - docker pull mysql:5.6
+    - docker run -d --name="mysql-database" -p 3307:3306 -e "MYSQL_ROOT_PASSWORD=rootpass" mysql:5.6
+    - sleep 10
+    - docker run --link="mysql-database:mysql" mysql:5.6 sh -c 'exec mysqladmin -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD" create circle_test'
+    - docker logs mysql-database
+
+  override:
+    - composer install --no-dev --no-interaction --no-progress --prefer-source --verbose
+    - npm install
+
+  post:
+    # Compile assets with Gulp.
+    - ./node_modules/.bin/gulp --production
+
+    # Create Laravel configuration file.
     - echo "APP_ENV=circleci" >> ./.env
     - echo "APP_DEBUG=true" >> ./.env
-    - echo "APP_KEY=$APP_KEY" >> ./.env
+    - echo "APP_KEY=" >> ./.env
+    - php artisan key:generate
 
-    - echo "DB_HOST=$DB_HOST" >> ./.env
+    - echo "DB_HOST=localhost:3307" >> ./.env
     - echo "DB_DATABASE=circle_test" >> ./.env
-    - echo "DB_USERNAME=ubuntu" >> ./.env
-    - echo "DB_PASSWORD=" >> ./.env
+    - echo "DB_USERNAME=root" >> ./.env
+    - echo "DB_PASSWORD=rootpass" >> ./.env
 
-    - echo "DB_PHPBB_HOST=$DB_HOST" >> ./.env
+    - echo "DB_PHPBB_HOST=localhost:3307" >> ./.env
     - echo "DB_PHPBB_DATABASE=circle_test" >> ./.env
-    - echo "DB_PHPBB_USERNAME=ubuntu" >> ./.env
-    - echo "DB_PHPBB_PASSWORD=" >> ./.env
+    - echo "DB_PHPBB_USERNAME=root" >> ./.env
+    - echo "DB_PHPBB_PASSWORD=rootpass" >> ./.env
 
     - cat ./.env
 
-    # phpBB configuration file.
+    # Create phpBB configuration file.
     - mkdir -p ./public/forums
     - echo "<?php" >> ./public/forums/config.php
     - echo "\$dbms = 'phpbb\\db\\driver\\mysqli';" >> ./public/forums/config.php
@@ -50,19 +66,6 @@ dependencies:
     - echo "@define('DEBUG', true);" >> ./public/forums/config.php
 
     - cat ./public/forums/config.php
-
-    - sudo sed --in-place '/bind-address/d' /etc/mysql/my.cnf
-    - echo "GRANT ALL PRIVILEGES ON *.* TO 'ubuntu'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES;" > query.sql
-    - mysql -u ubuntu circle_test < query.sql
-    - rm query.sql
-    - sudo service mysql restart
-
-  override:
-    - composer install --no-dev --no-interaction --no-progress --prefer-source --verbose
-    - npm install
-
-  post:
-    - ./node_modules/.bin/gulp --production
 
 test:
   pre:
