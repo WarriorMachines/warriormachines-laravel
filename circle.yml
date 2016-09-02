@@ -25,24 +25,22 @@ dependencies:
     - docker run --link="mysql-database:mysql" mysql:5.6 sh -c 'exec mysqladmin -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD" create circle_test'
     - docker logs mysql-database
 
+    - echo "DB_HOST=localhost:3307" >> ./.env
+    - echo "DB_DATABASE=circle_test" >> ./.env
+    - echo "DB_USERNAME=root" >> ./.env
+    - echo "DB_PASSWORD=rootpass" >> ./.env
+
   override:
     - composer install --no-dev --no-interaction --no-progress --prefer-source --verbose
     - npm install
 
   post:
-    # Compile assets with Gulp.
     - ./node_modules/.bin/gulp --production
 
-    # Create Laravel configuration file.
     - echo "APP_ENV=circleci" >> ./.env
     - echo "APP_DEBUG=true" >> ./.env
     - echo "APP_KEY=" >> ./.env
     - php artisan key:generate
-
-    - echo "DB_HOST=localhost:3307" >> ./.env
-    - echo "DB_DATABASE=circle_test" >> ./.env
-    - echo "DB_USERNAME=root" >> ./.env
-    - echo "DB_PASSWORD=rootpass" >> ./.env
 
     - echo "DB_PHPBB_HOST=localhost:3307" >> ./.env
     - echo "DB_PHPBB_DATABASE=circle_test" >> ./.env
