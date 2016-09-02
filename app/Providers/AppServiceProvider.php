@@ -15,11 +15,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Log every SQL query string.
-        DB::connection('phpbb')->listen(function ($sql, $bindings, $time) {
-            Log::debug($sql);
-            Log::debug($bindings);
-        });
+        if (app()->environment('local')) {
+            // Log every SQL query string.
+            DB::listen(function ($sql, $bindings, $time) {
+//            DB::connection('phpbb')->listen(function ($sql, $bindings, $time) {
+                Log::debug($sql);
+            });
+        }
     }
 
     /**
